@@ -16,12 +16,27 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            .sample-container-relative {
+                width: 250px;
+                margin-left: auto;
+                margin-right: auto;
+                position: relative;
+            }
             .sample-container-left {
                 width: 250px;
+            }
+            .sample-container-left-relative {
+                width: 250px;
+                position: relative;
             }
             .sample-container-right {
                 width: 250px;
                 float: right;
+            }
+            .sample-container-right-relative {
+                width: 250px;
+                float: right;
+                position: relative;
             }
             .hover-tooltip {
                 padding: 15px;
@@ -93,7 +108,7 @@
                 <px-tooltip
                     smart-orientation
                     orientation="top"
-                    tooltip-message="Top orientation would go off screen, so uses right orientation">
+                    tooltip-message="Left orientation would go off screen, so uses right orientation">
                 </px-tooltip>
             </div>
         </div>
@@ -113,10 +128,10 @@
                 <px-tooltip
                     smart-orientation
                     orientation="top"
-                    tooltip-message="Top orientation would go off screen, so uses left orientation">
+                    tooltip-message="Right orientation would go off screen, so uses left orientation">
                 </px-tooltip>
             </div>
         </div>
-
+        
     </body>
 </html>

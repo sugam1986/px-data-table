@@ -40,6 +40,17 @@ Finally, use the component in your application:
 
 ## Attributes
 
+####delay
+*Type:* **Number** - (*Optional*) - *Default:* "1000"
+The delay in milliseconds until the tooltip is displayed.
+
+```
+<px-tooltip
+  ...
+  delay="500">
+</px-tooltip>
+```
+
 ####for
 *Type:* **String** - (*Optional*) - *Default:* ""
 The element to which the tooltip provides additional information.  Optional, tooltip will be attached to parent element if a 'for' id is not provided.
@@ -62,28 +73,6 @@ The position of the tooltip relative to the 'for' element. Currently supports 't
 </px-tooltip>
 ```
 
-####tooltip-message
-*Type:* **String** - (*Required*) - *Default:* ""
-The text message that will be displayed in the tooltip. Also support HTML elements.
-
-```
-<px-tooltip
-  ...
-  tooltip-message="Hello World">
-</px-tooltip>
-```
-
-####delay
-*Type:* **Number** - (*Optional*) - *Default:* "1000"
-The delay in milliseconds until the tooltip is displayed.
-
-```
-<px-tooltip
-  ...
-  delay="500">
-</px-tooltip>
-```
-
 ####smartOrientation
 *Type:* **Boolean** - (*Optional*) - *Default:* "false"
 If smartOrientation is turned on and the orientation is "top" or "bottom", then the tooltip will override the default orientation (top or bottom) to try to better fit on the page (example: will be on left if tooltip will go off right side of the screen)
@@ -97,6 +86,16 @@ Note: this feature is only enabled for the "top" or "bottom" orientations
 </px-tooltip>
 ```
 
+####tooltip-message
+*Type:* **String** - (*Required*) - *Default:* ""
+The text message that will be displayed in the tooltip. Also support HTML elements.
+
+```
+<px-tooltip
+  ...
+  tooltip-message="Hello World">
+</px-tooltip>
+```
 
 <br />
 <hr />

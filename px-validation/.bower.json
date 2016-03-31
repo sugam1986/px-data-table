@@ -29,6 +29,6 @@
     "commit": "91e15e45d0d81e80d9e07a8cab07a9a59a62742a"
   },
   "_source": "https://github.com/PredixDev/px-validation.git",
-  "_target": "*",
-  "_originalSource": "https://github.com/PredixDev/px-validation.git"
+  "_target": "~0.0.3",
+  "_originalSource": "px-validation"
 }

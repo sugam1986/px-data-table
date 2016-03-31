@@ -1,0 +1,133 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
+-->
+<link rel="import" href="../polymer/polymer.html" />
+
+<!--
+Element providing a trigger for the px-dropdown element.
+
+##### Usage
+
+    <px-dropdown-chevron class="px-dropdown-trigger"></px-dropdown-chevron>
+
+@element px-dropdown-chevron
+@blurb Element which, when clicked, opens the px-dropdown element.
+@homepage index.html
+@demo demo.html
+-->
+
+<dom-module id="px-dropdown-chevron">
+  <link rel="import" type="css" href="css/px-dropdown-chevron.css" />
+  <template>
+    <span class$="{{_chevronClass('px-dropdown-chevron u-ph-- ', hover, opened)}}" id="trigger">
+      <i class$="{{_chevronClass('fa fa-angle-down ', hover, opened)}}"></i>
+    </span>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-dropdown-chevron',
+    properties:{
+      /**
+       * Boolean which reflects whether the chevron is being hovered over.
+       *
+       * @type Boolean
+       * @default false
+       * @notify true
+       */
+      hover: {
+        type: Boolean,
+        value: false,
+        notify: true
+      },
+      /**
+       * Boolean which reflects whether the menu is open.
+       *
+       * @type Boolean
+       * @default false
+       * @notify true
+       */
+      opened: {
+        type: Boolean,
+        value: false,
+        notify: true
+      }
+    },
+    attached: function() {
+      this.addEventListener('hoverOff', this._manipulateHoverOff);
+      this.addEventListener('hoverOn', this._manipulateHoverOn);
+      this.addEventListener('opened', this._manipulateOpened);
+    },
+    detached: function() {
+      this.removeEventListener('hoverOn',this._manipulateHoverOn);
+      this.removeEventListener('hoverOff',this._manipulateHoverOff);
+      this.removeEventListener('opened',this._manipulateOpened);
+    },
+    /**
+     * this function flips the opened flag, and changes the class for the component
+     *
+     *
+     * @method _manipulateOpened
+     */
+    _manipulateOpened: function() {
+      this.opened = !this.opened;
+      this._manipulateClass();
+    },
+    /**
+     * this function flips the hover flag, and changes the class for the component
+     *
+     * @method _manipulateHover
+     */
+    _manipulateHoverOff: function() {
+      this.hover = false;
+      this._manipulateClass();
+    },
+    _manipulateHoverOn: function() {
+      this.hover = true;
+      this._manipulateClass();
+    },
+    /**
+     * this function adds or removes the hover and opened classes
+     *
+     * @method _manipulateClass
+     */
+    _manipulateClass: function() {
+      var classList = this.classList;
+      if (this.opened) {
+        if (!classList.contains('opened')) {
+          classList.add('opened');
+        }
+      } else {
+        if (classList.contains('opened')) {
+          classList.remove('opened');
+        }
+      }
+
+      if (this.hover) {
+        if (!classList.contains('hover') && !classList.contains('opened')) {
+          classList.add('hover');
+        }
+      } else {
+        if (classList.contains('hover')) {
+          classList.remove('hover');
+        }
+      }
+    },
+    /**
+     * This method add either the opened or hover class.
+     *
+     * @method _chevronClass
+     */
+    _chevronClass: function(base) {
+      if (this.opened) {
+        base += "opened";
+      } else if (this.hover) {
+        base +="hover";
+      }
+      return base;
+    }
+  });
+</script>

@@ -1,0 +1,362 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
+-->
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="px-dropdown-content.html" />
+<link rel="import" href="px-dropdown-chevron.html" />
+<link rel="import" href="px-dropdown-text.html" />
+<!--
+Element providing a dropdown solution.
+
+##### Usage
+
+<px-dropdown>
+  <px-dropdown-text class="px-dropdown-text">Text</px-dropdown-text>
+  <px-dropdown-content class="px-dropdown-content" extend-dropdown="true" extend-dropdown-by="15" max-cont-character-width="10" items='[{"key":"one", "val": "One"}, {"key":"two", "val": "Two"}, {"key":"three", "val": "Three"}, {"key":"four", "val": "How now brown cow"}]'>
+  </px-dropdown-content>
+</px-dropdown>
+
+@element px-dropdown
+@blurb Element providing a dropdown solution.
+@homepage index.html
+@demo demo.html
+-->
+<dom-module id="px-dropdown">
+  <link rel="import" type="css" href="css/px-dropdown.css" />
+  <template>
+    <div>
+      <div
+      on-tap="triggerClicked"
+      on-mouseover="_hoverOn"
+      on-mouseout="_hoverOff"
+      class$="{{_dropcellClass(opened, hover)}}"
+      id="dropcell">
+        <content select=".px-dropdown-text"></content>
+        <template is="dom-if" if="{{_hideChevron(hideChevron)}}">
+          <px-dropdown-chevron class="px-dropdown-chevron"></px-dropdown-chevron>
+        </template>
+      </div>
+    </div>
+    <content select=".px-dropdown-content"></content>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+
+    is: 'px-dropdown',
+    properties: {
+      /**
+      * A flag which checks if the dropdown trigger has been clicked or not.
+      *
+      * @param opened
+      * @notify true
+      * @type Boolean
+      * @default false
+      */
+      opened:{
+        type: Boolean,
+        notify: true,
+        value: false
+      },
+      /**
+      * A flag which reflects whether the dropdown is being hovered over.
+      *
+      * @param hover
+      * @notify true
+      * @type Boolean
+      * @default false
+      */
+      hover: {
+        type: Boolean,
+        notify: true,
+        value: false
+      },
+      /**
+      * A flag which reflects whether the content is showing above
+      * the dropcell.
+      *
+      * @param above
+      * @notify false
+      * @type Boolean
+      * @default false
+      */
+      above: {
+        type: Boolean,
+        value: false
+      },
+      /**
+      * A flag which reflects whether the chevron should be hidden
+      *
+      * @param hideChevron
+      * @observer _hideChevron
+      * @type Boolean
+      * @default false
+      */
+      hideChevron: {
+        type: Boolean,
+        value: false,
+        observer: '_hideChevron'
+      },
+      /**
+       * An attribute which specifies the bounding target the dropdown will be
+       * displayed within
+       *
+       * @param boundTarget
+       * @type HTMLElement
+       * @default null
+       */
+      boundTarget : {
+        type: HTMLElement,
+        value: null
+      },
+      /**
+       * A parameter which specifies whether the width has been set on the
+       * px-dropdown text div.
+       *
+       * @param _isTextWidthSet
+       * @type Boolean
+       * @default false
+       */
+      _isTextWidthSet: {
+        type: Boolean,
+        value: false
+      }
+    },
+    observers: [
+      '_boundTargetChanged(boundTarget, isAttached)'
+    ],
+    ready: function() {
+
+    },
+    attached: function() {
+      this.addEventListener('dropdown_flip', this._flipOpened);
+      this.addEventListener('resize',  this._reset);
+    },
+    detached: function() {
+      this.removeEventListener('dropdown_flip', this._flipOpened);
+      this.removeEventListener('resize', this._reset);
+    },
+    /**
+    * This function checks whether the chevron should be visible or
+    * hidden.
+    *
+    * @method _hideChevron
+    *
+    */
+    _hideChevron: function() {
+      return (!this.hideChevron);
+    },
+    /**
+    * This function is called when the bound target has changed
+    *
+    * @method _boundTargetChanged
+    * @param boundTarget
+    * @param isAttached
+    *
+    */
+    _boundTargetChanged: function(boundTarget, isAttached) {
+      //find the element if we have been passed an id
+      if (typeof boundTarget === 'string') {
+        this.boundTarget = this.domHost ? this.domHost.$[boundTarget] :
+            Polymer.dom(this.ownerDocument).querySelector('#' + boundTarget);
+      }
+    },
+   /**
+   * This function is called when the dropdown trigger/chevron is clicked, and
+   * it either opens or closes (shows/hides) the content.
+   *
+   * @method triggerClicked
+   * @attribute evt
+   * @type Object
+   */
+    triggerClicked: function(evt) {
+      if (!this.opened) {
+        Polymer.dom(this).querySelector(".px-dropdown-content").open();
+        this._setPosition();
+        this._setDivWidth();
+      } else {
+        Polymer.dom(this).querySelector(".px-dropdown-content").close();
+        this._reset();
+      }
+      this._flipOpened();
+      this.fire('dropdownOpen', evt);
+    },
+    /**
+    * This function sets the width of the div inside the px-dropdown-text component.
+    * Without doing this, IE10 expands to the size of the selected item. Thanks, IE10.
+    *
+    * @method _setDivWidth
+    */
+    _setDivWidth: function() {
+      if (!this._isTextWidthSet) {
+        var text = Polymer.dom(this).querySelector('px-dropdown-text'),
+            div = Polymer.dom(text.root).querySelector('div');
+
+        div.style.width = div.style.width = window.getComputedStyle(div, null).getPropertyValue('width'); + 'px';
+        this.set('_isTextWidthSet', true);
+      }
+    },
+    /**
+    * This function flips the "opened" property
+    *
+    * @method _flipOpened
+    */
+    _flipOpened: function() {
+      this._fireChevron('opened');
+      this.opened = !this.opened;
+    },
+    /**
+    * This function checks to make sure the chevron exists, and if it does,
+    * fire an event.
+    *
+    * @method _fireChevron
+    */
+    _fireChevron: function(fireEvent) {
+      var chevron = Polymer.dom(this.root).querySelector('px-dropdown-chevron');
+      if (chevron) {
+        chevron.fire(fireEvent);
+      }
+    },
+    /**
+    * This function returns the correct class for the chevron
+    * depending on the state of the component
+    * @method _dropcellClass
+    * @param opened
+    * @param hover
+    */
+    _dropcellClass: function(opened, hover) {
+      var returnClass = 'flex ';
+      if (this.opened) {
+        returnClass += 'opened';
+      } else if (this.hover) {
+        returnClass += 'hover';
+      }
+      return returnClass;
+    },
+    /**
+    * This function fires off a hoverOn event which px-dropdown-chevron
+    * picks up, and sets the hover property to true.
+    *
+    * @method _hoverOn
+    */
+    _hoverOn: function() {
+      /*
+      normally, I would have 1 function for both on and off states, and just flip the value of hover
+      but IE10 was having issues keeping up with it, so I split it into 2 functions.
+      */
+      this._fireChevron('hoverOn');
+      this.hover = true;
+    },
+    /**
+    * This function fires off a hoverOff event which px-dropdown-chevron
+    * picks up, and sets the hover property to false.
+    *
+    * @method _hoverOff
+    */
+    _hoverOff: function() {
+      /*
+      normally, I would have 1 function for both on and off states, and just flip the value of hover
+      but IE10 was having issues keeping up with it, so I split it into 2 functions.
+      */
+      this._fireChevron('hoverOff');
+      this.hover = false;
+    },
+    /**
+    * This function resets the above property as well as set
+    * the top property to empty string - not 0, which causes firefox to miscalculate.
+    * @method _reset
+    */
+    _reset: function() {
+      var content = Polymer.dom(this).querySelector('px-dropdown-content'),
+          dropdown = content.$.dropdown;
+      this.above = false;
+      dropdown.style.top = '';
+    },
+    /**
+    * This function changes the position of the dropdown content
+    * if the content area goes under the viewport
+    * @method _setPosition
+    */
+    _setPosition: function() {
+
+      if(this.boundTarget !== null) {
+          this.positionWithinBounds(this.boundTarget.getBoundingClientRect());
+      } else if (this._isoffScreenOnBottom()) {
+        this._setTopPosition();
+      }
+    },
+    /**
+    * This function figures out whether the content area for the dropdown is
+    * under the viewport
+    * @method _isoffScreenOnBottom
+    */
+    _isoffScreenOnBottom: function() {
+      var content = Polymer.dom(this).querySelector('px-dropdown-content'),
+          dropdown = content.$.dropdown,
+          dropdownRect = dropdown.getBoundingClientRect(),
+          contentRect = content.getBoundingClientRect(),
+          dropdownBottomPoint = dropdownRect.bottom;
+      return dropdownBottomPoint > window.innerHeight;
+    },
+    /**
+    * This function appropriately positions the dropdown within the bounds given
+    * @method positionWithinBounds
+    * @param parentBoundingRect Object
+    */
+    positionWithinBounds: function(parentBoundingRect) {
+      var content = Polymer.dom(this).querySelector('px-dropdown-content'),
+          dropdown = content.$.dropdown,
+          dropcell = this.$.dropcell,
+          dropcellRect = dropcell.getClientRects()[0],
+          dropdownRect,
+          dropdownBottomPoint,
+          sizeAbove,
+          sizeBelow;
+
+      //reset content size and get some values
+      this._reset();
+      content.resetHeight();
+      dropdownRect = dropdown.getBoundingClientRect();
+      dropdownBottomPoint = dropdownRect.bottom,
+      sizeAbove = dropdownRect.top - parentBoundingRect.top - parseInt(dropcellRect.height),
+      sizeBelow = parentBoundingRect.bottom - dropdownRect.top;
+
+      //if we can't fit it below
+      if(dropdownBottomPoint > parentBoundingRect.bottom) {
+
+        //can we fit it above ?
+        if(sizeAbove > dropdownRect.height) {
+          content.adjustHeight();
+          this._setTopPosition();
+        } else {
+
+          //fit it where we have the most space
+          if(sizeAbove > sizeBelow) {
+            content.sizeHeight(sizeAbove - 1);
+            this._setTopPosition();
+          } else {
+            content.sizeHeight(sizeBelow - 1);
+          }
+        }
+      }
+    },
+    /**
+    * This function changes the position of the content area to be above
+    * the dropcell, instead of the default below.
+    * @method setTopPosition
+    */
+    _setTopPosition: function() {
+      var content = Polymer.dom(this).querySelector('px-dropdown-content'),
+          dropdown = content.$.dropdown,
+          dropdownRect = dropdown.getClientRects()[0],
+          dropcell = this.$.dropcell,
+          dropcellRect = dropcell.getClientRects()[0],
+          newTop = (parseInt(dropdown.offsetTop) - parseInt(dropdownRect.height) - parseInt(dropcellRect.height)) + 'px';
+
+      dropdown.style.top = newTop;
+      this.above = true;
+    }
+  });
+</script>
