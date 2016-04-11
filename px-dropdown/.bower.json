@@ -1,6 +1,6 @@
 {
   "name": "px-dropdown",
-  "version": "0.3.0",
+  "version": "0.7.3",
   "main": [
     "px-dropdown.html"
   ],
@@ -17,7 +17,9 @@
     "polymer": "~1.2.3",
     "px-theme": "https://github.com/predixDev/px-theme.git#~0.4.2",
     "px-tooltip": "https://github.com/PredixDev/px-tooltip.git#~0.4.0",
-    "px-spacing-design": "https://github.com/PredixDev/px-spacing-design.git#~0.3.7"
+    "px-spacing-design": "https://github.com/PredixDev/px-spacing-design.git#~0.3.7",
+    "polymer-font-awesome": "mdwragg/polymer-font-awesome#~0.0.5",
+    "iron-dropdown": "PolymerElements/iron-dropdown#~1.3.0"
   },
   "devDependencies": {
     "px-list-ui-design": "https://github.com/predixDev/px-list-ui-design.git#~v0.3.8",
@@ -27,13 +29,13 @@
     "px-starter-kit-design": "https://github.com/predixDev/px-starter-kit-design.git#~0.4.9"
   },
   "homepage": "https://github.com/predixDev/px-dropdown",
-  "_release": "0.3.0",
+  "_release": "0.7.3",
   "_resolution": {
     "type": "version",
-    "tag": "v0.3.0",
-    "commit": "57ff4585a483c8cae8e0f29b4bdc3ccb43bca077"
+    "tag": "v0.7.3",
+    "commit": "e407f606a0cf58d13bf320ce7ac96e070e7fb072"
   },
   "_source": "https://github.com/predixDev/px-dropdown.git",
-  "_target": "~0.3.0",
+  "_target": "~0.7.0",
   "_originalSource": "px-dropdown"
 }

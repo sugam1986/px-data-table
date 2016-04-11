@@ -213,6 +213,9 @@ html {
  * Monochromatic (gray10 is darkest, gray1 is lightest)
  */
 /**
+ * Define grey = gray to avoid dev typos
+ */
+/**
  * Buttons
  */
 /**
@@ -743,19 +746,19 @@ textarea {
   color: #7c7c84; }
 
 .px-dropdown--content {
-  text-align: left;
-  width: 100%; }
-
-.px-dropdown-content {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  position: relative; }
-
-#dropdown {
+  width: 100%;
   left: 0;
   position: absolute;
-  height: auto; }
+  height: auto;
+  z-index: 1;
+  max-height: 14.8rem;
+  overflow-y: auto;
+  cursor: pointer; }
+
+.px-dropdown--listitem {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
 
 /*------------------------------------*    #PX-META-LISTS-DESIGN
 \*------------------------------------*/

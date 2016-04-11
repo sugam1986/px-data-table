@@ -1,3 +1,42 @@
+v0.7.2
+================
+* removed documentation from README, and replaced with link to github page, where cos are auto generated.
+
+v0.7.1
+================
+* updated readme and added stopPropagation on internal events
+
+v0.7.0
+================
+* removed px-dropdown-lock-width
+* added readonly 'value' attribute on dropdown, computed from display-value. Fire "change" event on dropdown when value changes
+
+v0.6.2
+================
+* more data-table fixes. Fire px-dropdown-lock-width event when requiring a container to lock its width to the dropdown width.
+
+v0.6.1
+================
+* fix bug when embedded in data-table
+
+v0.6.0
+=================
+* fix firefox positioning bug
+* added allow-outside-scroll attribute on px-dropdown-content. By default lock scrolling on the dropdown when open and prevent scrolling everywhere else.
+
+v0.5.0
+==================
+* px-dropdown-text now already included in px-dropdown. Use display-value attribute on px-dropdown to set its text
+
+v0.4.1
+==================
+* fixed Shadow Dom support
+* fixed IE10 selected value bug
+
+v0.4.0
+==================
+* new attribute on px-dropdown: prevent-close-on-outside-click. Default to false and dropdown now automatically closes on outside clicks
+
 v0.3.0
 ==================
 * make it more obvious it is possible to scroll by reducing the height of the dropdown by half an item's height if the dropdown has scrollbars

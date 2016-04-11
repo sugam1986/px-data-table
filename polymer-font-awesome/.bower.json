@@ -1,8 +1,9 @@
 {
   "name": "polymer-font-awesome",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "authors": [
-    "Martin Wragg mdwragg@gmail.com"
+    "Martin Wragg mdwragg@gmail.com",
+    "Runn Vermel runn@vermel.org"
   ],
   "description": "Polymer component to allow easy use of Font Awesome icons in your Polymer element.",
   "keywords": [
@@ -26,13 +27,13 @@
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "web-component-tester": "^4.0.0"
   },
-  "_release": "0.0.3",
+  "_release": "0.0.5",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.3",
-    "commit": "9c2b6a00cb0ddad4ed3aeac7ad04fd0705ca54bd"
+    "tag": "v0.0.5",
+    "commit": "eedaef9dc75868a5791d95abfc2d11dc79159e69"
   },
   "_source": "https://github.com/mdwragg/polymer-fontawesome.git",
-  "_target": "~v0.0.3",
+  "_target": "~v0.0.5",
   "_originalSource": "polymer-font-awesome"
 }

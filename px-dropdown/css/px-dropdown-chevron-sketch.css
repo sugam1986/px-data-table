@@ -213,6 +213,9 @@ html {
  * Monochromatic (gray10 is darkest, gray1 is lightest)
  */
 /**
+ * Define grey = gray to avoid dev typos
+ */
+/**
  * Buttons
  */
 /**
@@ -576,6 +579,14 @@ a {
 
 .viewport--full-height {
   min-height: 100vh; }
+
+.chevronContainer {
+  width: 1.2666666667rem;
+  height: 1.2666666667rem; }
+
+iron-icon {
+  width: 100%;
+  height: 100%; }
 
 /*------------------------------------*    #CLEARFIX
 \*------------------------------------*/

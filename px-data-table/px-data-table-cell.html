@@ -31,14 +31,16 @@
           <span>
             <px-dropdown
               selected-value="{{cellValue}}"
-              bound-target="{{dropdownBounds}}">
-              <px-dropdown-text
-                class="px-dropdown-text" display-value="{{cellValue}}"></px-dropdown-text>
+              bound-target="{{dropdownBounds}}"
+              display-value="{{cellDisplayValue}}"
+              content-anchor="{{_cellAnchor}}"
+              on-change="saveCell">
               <px-dropdown-content
                 class="px-dropdown-content"
                 extend-dropdown="true"
                 extend-dropdown-by="25"
                 max-cont-character-width="10"
+                allow-outside-scroll="true"
                 items="{{dropdownItems}}">
               </px-dropdown-content>
             </px-dropdown>
@@ -108,7 +110,7 @@
         cellValidation: {
           type: Object,
           value: function(){
-            return {};
+            return {passedValidation: true};
           },
           notify: true
         },
@@ -148,7 +150,14 @@
         _dropdownItem: {
           type: Boolean,
           value: false,
+        },
+        _cellAnchor: {
+          type: HTMLElement,
+          value: function() { return null;}
         }
+      },
+      listeners: {
+        'tap': 'editCell',
       },
       _cellDisplayValueChanged: function(newValue){
         if(this.$$('.cell--value') !== undefined && this.$$('.cell--value') !== null){
@@ -238,6 +247,7 @@
       },
       attached: function() {
         this.toggleClass('td__dropdown', this._dropdownItem);
+        this._cellAnchor = this;
       },
       _setDropdownItem: function() {
         //we check if there are any items in dropdownItems, and if there are, this is a dropdown cell.
