@@ -1,3 +1,24 @@
+v0.9.2
+===============
+* Minor CSS text colour fix.
+
+v0.9.1
+===============
+* Fix bug where selecting an item having a tooltip would set the value and displayValue to this item + its tooltip
+
+v0.9.0
+===============
+* Upgrade to Polymer 1.4.0
+
+v0.8.1
+================
+* display-value attribute now notifies
+
+v0.8.0
+================
+* Apply scroll lock only if content has vertical scroll bars
+* added 'checkbox-mode' attribute on px-dropdown-content, allowing it to function as a list of items with checkboxes
+
 v0.7.4
 ================
 * brought the default border color for dropdown.

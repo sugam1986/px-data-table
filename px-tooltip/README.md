@@ -52,14 +52,32 @@ The delay in milliseconds until the tooltip is displayed.
 ```
 
 ####for
-*Type:* **String** - (*Optional*) - *Default:* ""
-The element to which the tooltip provides additional information.  Optional, tooltip will be attached to parent element if a 'for' id is not provided.
+*Type:* **Object** - (*Optional*) - *Default:* ""
+The element to which the tooltip provides additional information.  
+Optional, tooltip will be attached to parent element if a 'for' id is not provided.
+
+'for' can be either an String for the ID of the element, or the element itself.
+
+If an ID is passed, this element must be a sibling of the tooltip.
 
 ```
 <px-tooltip
   ...
   for="exampleDiv">
 </px-tooltip>
+
+<px-tooltip
+...
+id="myTooltip">
+</px-tooltip>
+<script>
+  document.addEventListener("WebComponentsReady", function() {
+    var target = Polymer.dom(document).querySelector('#hoverDiv'),
+        tt = Polymer.dom(document).querySelector('#myTooltip');
+
+    tt.set('for',target);
+  });
+</script>
 ```
 
 ####orientation
@@ -75,9 +93,7 @@ The position of the tooltip relative to the 'for' element. Currently supports 't
 
 ####smartOrientation
 *Type:* **Boolean** - (*Optional*) - *Default:* "false"
-If smartOrientation is turned on and the orientation is "top" or "bottom", then the tooltip will override the default orientation (top or bottom) to try to better fit on the page (example: will be on left if tooltip will go off right side of the screen)
-
-Note: this feature is only enabled for the "top" or "bottom" orientations
+If smartOrientation is turned on then the tooltip will override the default orientation to try to better fit on the page. Smart Orientation will be chosen in a clockwise manner. (example: for a tooltip with "right" orientation it will be below if tooltip will go off right side of the screen, but left if it goes off right *and* bottom side of the screen)
 
 ```
 <px-tooltip

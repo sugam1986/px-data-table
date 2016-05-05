@@ -82,6 +82,9 @@ Events:
                  selected-rows="{{selectedRows}}"
                  meta="{{meta}}"
                  hide-pagination-control="{{hidePaginationControl}}"
+                 show-column-chooser="{{showColumnChooser}}"
+                 enable-column-reorder="{{enableColumnReorder}}"
+                 enable-column-resize="{{enableColumnResize}}"
                  id="dataTable">
                  <content></content>
       </aha-table>
@@ -216,6 +219,39 @@ Events:
           return [];
         },
         notify: true
+      },
+      /**
+       * Property to set the visibility of the table column chooser (allowing
+       * the user to show and hide columns)
+       *
+       *
+       *
+       */
+      showColumnChooser: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * Property to enable draggability of column headers for reordering
+       * columns
+       *
+       * @default false
+       */
+      enableColumnReorder: {
+        type: Boolean,
+        value:false
+      },
+      /**
+       * Property to enable resizing of column headers through click and drag on
+       * the right border of the header.
+       * If there is no space available then resizing won't be possible (i.e all
+       * columns already to their minimum size, typically when the table can't
+       * be displayed entirely)
+       * @default false
+       */
+      enableColumnResize: {
+        type: Boolean,
+        value: false
       }
     },
 
