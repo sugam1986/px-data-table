@@ -1,6 +1,6 @@
 {
   "name": "px-validation",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": [
     "px-validation.html"
   ],
@@ -22,11 +22,11 @@
     "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.4.9"
   },
   "homepage": "https://github.com/predixDev/px-validation",
-  "_release": "0.1.0",
+  "_release": "0.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.1.0",
-    "commit": "0d3f69a3205e37e6b6317076d87a36428d2e9656"
+    "tag": "v0.1.1",
+    "commit": "31c26bc31bb0a8df812de8cc014cdbb6df862a66"
   },
   "_source": "https://github.com/predixDev/px-validation.git",
   "_target": "~0.1.0",
