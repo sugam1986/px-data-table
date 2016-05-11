@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": [
     "px-card.html"
   ],
@@ -11,7 +11,8 @@
     "sass",
     "bower_components",
     "node_modules",
-    "test"
+    "test",
+    "OSS_Notice.pdf"
   ],
   "dependencies": {
     "polymer": "~v1.4.0",
@@ -32,11 +33,11 @@
     "px-defaults-design": "https://github.com/PredixDev/px-defaults-design.git#~0.2.4"
   },
   "homepage": "https://github.com/PredixDev/px-card",
-  "_release": "0.3.2",
+  "_release": "0.3.3",
   "_resolution": {
     "type": "version",
-    "tag": "v0.3.2",
-    "commit": "9b897c83d409f23ed953b186938a7e0c6f67e1e8"
+    "tag": "v0.3.3",
+    "commit": "5a83c96ef597e927bbe9d5eea3fd85f6644252a3"
   },
   "_source": "https://github.com/PredixDev/px-card.git",
   "_target": "~0.3.0",
