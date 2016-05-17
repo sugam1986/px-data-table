@@ -1,6 +1,6 @@
 {
   "name": "iron-fit-behavior",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "http://polymer.github.io/LICENSE.txt",
   "description": "Fits an element inside another element",
   "private": true,
@@ -29,11 +29,11 @@
   },
   "ignore": [],
   "homepage": "https://github.com/PolymerElements/iron-fit-behavior",
-  "_release": "1.2.0",
+  "_release": "1.2.1",
   "_resolution": {
     "type": "version",
-    "tag": "v1.2.0",
-    "commit": "9f170448fc76b0051e1a4d36c87e33346ee1ce67"
+    "tag": "v1.2.1",
+    "commit": "d7ab3c73b1dcdefed9d11046ab06ead506b86727"
   },
   "_source": "git://github.com/PolymerElements/iron-fit-behavior.git",
   "_target": "^1.0.0",

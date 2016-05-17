@@ -1,6 +1,6 @@
 {
   "name": "polymer-font-awesome",
-  "version": "0.0.5",
+  "version": "0.1.1",
   "authors": [
     "Martin Wragg mdwragg@gmail.com",
     "Runn Vermel runn@vermel.org"
@@ -19,7 +19,7 @@
     "/test/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.2.0",
+    "polymer": "Polymer/polymer#^1.4.0",
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^1.0.9",
     "iron-icon": "PolymerElements/iron-icon#^1.0.7"
   },
@@ -27,13 +27,13 @@
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "web-component-tester": "^4.0.0"
   },
-  "_release": "0.0.5",
+  "_release": "0.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.5",
-    "commit": "eedaef9dc75868a5791d95abfc2d11dc79159e69"
+    "tag": "v0.1.1",
+    "commit": "88921ed899f146a73bab5a5d7f500bdf37e6c231"
   },
   "_source": "git://github.com/mdwragg/polymer-font-awesome.git",
-  "_target": "~0.0.5",
+  "_target": "~0.1.0",
   "_originalSource": "mdwragg/polymer-font-awesome"
 }

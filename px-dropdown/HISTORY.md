@@ -1,3 +1,15 @@
+v0.9.7
+===============
+* up minor version on polymer font awesome
+
+v0.9.6
+===============
+* removed dependency on .px-dropdown-content class
+
+v0.9.5
+===============
+* added oss_notice to bower ignore
+
 v0.9.4
 ===============
 * added pull request test for travis and updated OSS Notice
