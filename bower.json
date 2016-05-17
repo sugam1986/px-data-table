@@ -35,8 +35,5 @@
     "px-forms-design": "~0.3.13",
     "px-button-group-design": "~0.3.8",
     "px-typography-design": "~0.3.2"
-  },
-  "resolutions": {
-    "polymer-font-awesome": "~0.1.0"
   }
 }
