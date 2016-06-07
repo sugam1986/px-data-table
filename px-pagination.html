@@ -1,4 +1,10 @@
+
+
 <link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../paper-spinner/paper-spinner-lite.html"/>
+<style>
+
+</style>
 
 <!--
 Element that provides pagination.
@@ -13,38 +19,41 @@ Element that provides pagination.
   <link rel="import" type="css" href="css/aha-table.css"/>
 
   <template>
-
-			<span class="pagesize">
-				<span class="u-mr--">{{pagesizetitle}}</span>
-				<select id="pageSizeSelect" on-change="_changeDropDown">
+<span class="pagesize">
+<span class="u-mr--">{{pagesizetitle}}</span>
+<select id="pageSizeSelect" on-change="_changeDropDown">
           <option selected>10</option>
           <option>20</option>
-          <option>50</option>
+          <option>50</option>rows
+
           <option>100</option>
         </select>
-			</span>
+</span>
 
-			<span class="u-pl+ u-ml+ summary">
-				<span>{{firstItemIndexToDisplay}}</span>-<span>{{lastItemIndexToDisplay}}</span>
-				<span>{{itemoftext}}</span>
-				<span>{{numberOfItems}}</span>
-			</span>
 
-			<span class="paging">
-				<button
+<span class="u-pl+ u-ml+ summary">
+<span>{{firstItemIndexToDisplay}}</span>-<span>{{lastItemIndexToDisplay}}</span>
+<span>{{itemoftext}}</span>
+<span>{{numberOfItems}}</span>
+</span>
+
+<span class="paging">
+<button
           class$="{{_getPageupClass(currentPage)}}"
           on-click="goToPreviousPage"><i class="fa fa-angle-left"></i></button>
-				<span class="pager">
-					<template is="dom-repeat" items="{{_pagerButtons(pageCount, currentPage)}}" as="page">
+<span class="pager">
+<template is="dom-repeat" items="{{_pagerButtons(pageCount, currentPage)}}" as="page">
             <span on-click="_goToPage" class$="{{_getPagerButtonClass(page.val, currentPage)}}">{{page.val}}</span>
           </template>
-				</span>
-				<button
+</span>
+<button
           class$="{{_getPagedownClass(currentPage, pageCount)}}"
           on-click="goToNextPage"><i class="fa fa-angle-right"></i></button>
-			</span>
+</span>
+
 
   </template>
+
 </dom-module>
 
 <script>
@@ -136,19 +145,35 @@ Element that provides pagination.
     },
 
     _changeDropDown: function(e) {
+      var currElem = $(e.currentTarget).parents('#dataTable').parent().parent().siblings('.thin_main').children();
+      currElem.show();
+     
+      document.querySelector('#dataTable').style.visibility = 'hidden';
+      document.querySelector('#iowGrid').style.visibility = 'hidden';
+      //document.querySelector('#thicknessMeasrementsGrid').style.visibility = 'hidden';
+      
       var sizelist = [10, 20, 50, 100];
       var size = parseInt(e.target.value),
-        index = sizelist.indexOf(size);
+      index = sizelist.indexOf(size);
       var parentElem = this.$.pageSizeSelect,
-        optionList = Polymer.dom(parentElem).querySelectorAll("option");
-
+      optionList = Polymer.dom(parentElem).querySelectorAll("option");
       optionList.forEach(function(option) {
+
+      setTimeout(function(){
+      currElem.hide();
         if(parseInt(option.value) === parseInt(size)) {
-          option.setAttribute('selected', '');
-          e.target.selectedIndex = parseInt(index);
+        option.setAttribute('selected', '');
+        e.target.selectedIndex = parseInt(index);
+        document.querySelector('#iowGrid').style.visibility = 'visible';
+        //document.querySelector('#thicknessMeasrementsGrid').style.visibility = 'hidden';
+           
+
         } else {
-          option.removeAttribute('selected');
+         document.querySelector('#dataTable').style.visibility = 'visible';
+         document.querySelector('#thicknessMeasrementsGrid').style.visibility = 'visible';
+         option.removeAttribute('selected');
         }
+      },1000)
       });
 
       this._setPageSize(size);

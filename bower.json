@@ -19,7 +19,8 @@
     "px-theme": "~0.4.0",
     "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#~1.1.0",
     "polymer-font-awesome": "polymer-font-awesome#~v0.0.3",
-    "px-validation": "~0.0.3"
+    "px-validation": "~0.0.3",
+    "paper-spinner": "https://github.com/PolymerElements/paper-spinner.git#^1.2.0"
   },
   "devDependencies": {
     "px-tables-design": "~0.3.9",
@@ -33,5 +34,11 @@
     "px-forms-design": "~0.3.13",
     "px-button-group-design": "~0.3.8",
     "px-typography-design": "~0.3.2"
+  },
+  "resolutions": {
+    "px-theme": "~0.7.0",
+    "polymer": "~v1.4.0",
+    "polymer-font-awesome": "~0.1.0",
+    "px-tooltip": "~0.6.0"
   }
 }
